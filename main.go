@@ -11,11 +11,15 @@ func CalculateIfThereAreEnoughBarbers(countOfBarbersInBarbershop int, countOfMen
 	enough := true
 
 	numberOfMenWhoComeEveryDay := countOfMenInCity / daysInMonth
-	menWhoCanCutBarriesInADay := countOfBarbersInBarbershop * 8
+	menWhoCanCutBarriesInADay := countOfBarbersInBarbershop * workingDayInHours
+
+	if menWhoCanCutBarriesInADay > numberOfMenWhoComeEveryDay {
+		return enough, "барберы не нужны"
+	}
 
 	barriesCantCutNumberOfMen := numberOfMenWhoComeEveryDay - menWhoCanCutBarriesInADay
 
-	if barriesCantCutNumberOfMen != 0 {
+	if barriesCantCutNumberOfMen != 0 || barriesCantCutNumberOfMen > 0 {
 		numberOfBarbersNeeded := barriesCantCutNumberOfMen / countOfBarbersInBarbershop
 
 		enough = false
